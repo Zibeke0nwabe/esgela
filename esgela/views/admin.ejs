@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esgela.com Home</title>
+    <link rel="stylesheet" href="/public/style/style.css">
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            font-family: sans-serif;
+        }
+        .container{
+            min-height: 100vh;
+            display: grid;
+            grid-template-rows: 60px 1fr 40px;
+            grid-template-columns: 1fr;
+        }
+        .menu-icon{
+            display: none;
+        }
+        .logo_e{
+            background-color: goldenrod;
+            color: black;
+            padding-left: 8px;
+            padding-right: 8px;
+            margin-right: 4px;
+        }
+        .logo{
+            font-size: 2.3rem;
+            padding-top: 1px;
+            padding-bottom: 1px;
+
+        }
+        nav{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: black;
+            color: white;
+            padding: 1rem 2.5rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2),0 6px 2px 0 rgba(0,0,0,0.2);
+            z-index: 100000;
+        }
+        nav ul{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        nav ul li{
+            margin-right: 20px;
+        }
+        nav ul li a{
+            text-decoration: none;
+            color: goldenrod;
+            
+        }
+        nav ul li a:hover{
+            color: white;
+        }main{
+            padding: 8rem;
+            display: flex;
+            flex-direction: column;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+        footer{
+            background-color: black;
+        }
+        @media screen and (max-width:960px) {
+           
+          nav ul {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background-color: black;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            padding-bottom: 2.3rem;
+          }
+          nav ul.show{
+            display: flex;
+
+          }
+          .menu-icon{
+            display: block;
+          }
+          .hero .hero_div .name{
+            width: 65%;
+        }
+        .aboutUs{
+            display: flex;
+            flex-direction: column;
+        }
+    .aboutUs .informationText{
+        width: 100%;
+    }.aboutUs .informationText h2{
+        color: #212529;
+        font-size: 2.1rem;
+    }
+    .aboutUs .informationImage{
+        width: 100%;
+    }
+        }
+    </style>
+</head>
+<body>
+
+        <nav>
+           <div class="logo">
+            <a href="/" style="text-decoration: none; color: white;">
+                <span class="logo_e">e</span>Sgela.com
+            </a>
+        </div>
+           <div class="menu-icon">&#9776;</div>
+           <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/">Courses</a></li>
+            <li><a href="/">About</a></li>
+            <li><a href="/">Services</a></li>
+            <li><a href="/">Contact</a></li>
+           </ul>
+        </nav>
+        <main>
+            <h2>Student Table</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Student Number</th>
+                <th>ID Number</th>
+                <th>Privious School</th>
+                <th>ASP</th>
+                <th>Tertial level</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <%applicantsList.forEach(applicant => {%>
+                    <td><%=applicant.name%> </td>
+                    <td><%=applicant.surname%></td>
+                    <td> <%=applicant.studentNumber%></td>
+                    <td><%=applicant.idNumber%></td>
+                    <td><%=applicant.school%></td>
+                    <td><%=applicant.education%> - <%=applicant.asp%></td>
+                    <td><%=applicant.tertiary%></td>
+            </tr>
+                <%})%>
+                
+        </tbody>
+    </table>
+
+         
+        </main>
+        <footer></footer>
+    </div>
+
+    <script>
+        document.querySelector('.menu-icon').addEventListener('click',() =>{
+            document.querySelector('nav ul').classList.toggle('show')
+        })
+    </script>
+</body>
+</html>
+
+ 

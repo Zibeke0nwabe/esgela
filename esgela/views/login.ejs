@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esgela.com Home</title>
+    <link rel="stylesheet" href="/public/style/style.css">
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            font-family: sans-serif;
+        }
+        .container{
+            min-height: 100vh;
+            display: grid;
+            grid-template-rows: 60px 1fr 40px;
+            grid-template-columns: 1fr;
+        }
+        .menu-icon{
+            display: none;
+        }
+        .logo_e{
+            background-color: goldenrod;
+            color: black;
+            padding-left: 8px;
+            padding-right: 8px;
+            margin-right: 4px;
+        }
+        .logo{
+            font-size: 2.3rem;
+            padding-top: 1px;
+            padding-bottom: 1px;
+
+        }
+        nav{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: black;
+            color: white;
+            padding: 1rem 2.5rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2),0 6px 2px 0 rgba(0,0,0,0.2);
+            z-index: 100000;
+        }
+        nav ul{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        nav ul li{
+            margin-right: 20px;
+        }
+        nav ul li a{
+            text-decoration: none;
+            color: goldenrod;
+            
+        }
+        nav ul li a:hover{
+            color: white;
+        }main{
+            padding: 8rem;
+            display: flex;
+            flex-direction: column;
+        }
+        form input{
+            width: 340px;
+            height: 20px;
+            border: 2px solid rgb(192,187,187);
+            border-radius: 4px;
+            margin-bottom: 19px;
+            font-weight: 600;
+            padding-left: 1.1rem;
+            font-size: 16px;
+        }
+        .btnSubmit{
+            background-color: black;
+            color: white;
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin-top: 15px;
+        }
+        footer{
+            background-color: black;
+        }
+        @media screen and (max-width:960px) {
+           
+          nav ul {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background-color: black;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            padding-bottom: 2.3rem;
+          }
+          nav ul.show{
+            display: flex;
+
+          }
+          .menu-icon{
+            display: block;
+          }
+          .hero .hero_div .name{
+            width: 65%;
+        }
+        .aboutUs{
+            display: flex;
+            flex-direction: column;
+        }
+    .aboutUs .informationText{
+        width: 100%;
+    }.aboutUs .informationText h2{
+        color: #212529;
+        font-size: 2.1rem;
+    }
+    .aboutUs .informationImage{
+        width: 100%;
+    }
+        }
+    </style>
+</head>
+<body>
+
+        <nav>
+           <div class="logo">
+            <a href="/" style="text-decoration: none; color: white;">
+                <span class="logo_e">e</span>Sgela.com
+            </a>
+        </div>
+           <div class="menu-icon">&#9776;</div>
+           <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="#cardID">Courses</a></li>
+            <li><a href="#aboutID">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+           </ul>
+        </nav>
+        <main>
+            
+            <h2>Check Status</h2>
+            <p>Check with ID number or your Student number and Password</p>
+            <form action="/login" method="post">
+                <br>
+                <label for="identifier">ID number or Student number:</label><br>
+                <input type="text" name="identifier" id="identifier" required>
+                <br>
+                <label for="password">Enter your Password:</label><br>
+                <input type="password" name="password" id="password" required>
+                <br>
+                <span style="color: red;"><%=message%></span>
+                <br>
+                <a href="/admin">Admin</a>
+                <button type="submit" class="btnSubmit">Check</button>
+
+            </form>
+        </main>
+        <footer></footer>
+    </div>
+
+    <script>
+        document.querySelector('.menu-icon').addEventListener('click',() =>{
+            document.querySelector('nav ul').classList.toggle('show')
+        })
+    </script>
+</body>
+</html>

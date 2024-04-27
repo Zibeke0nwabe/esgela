@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esgela.com Home</title>
+    <link rel="stylesheet" href="/public/style/style.css">
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            font-family: sans-serif;
+        }
+        .container{
+            min-height: 100vh;
+            display: grid;
+            grid-template-rows: 60px 1fr 40px;
+            grid-template-columns: 1fr;
+        }
+        .menu-icon{
+            display: none;
+        }
+        .logo_e{
+            background-color: goldenrod;
+            color: black;
+            padding-left: 8px;
+            padding-right: 8px;
+            margin-right: 4px;
+        }
+        .logo{
+            font-size: 2.3rem;
+            padding-top: 1px;
+            padding-bottom: 1px;
+
+        }
+        nav{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: black;
+            color: white;
+            padding: 1rem 2.5rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2),0 6px 2px 0 rgba(0,0,0,0.2);
+            z-index: 100000;
+        }
+        nav ul{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        nav ul li{
+            margin-right: 20px;
+        }
+        nav ul li a{
+            text-decoration: none;
+            color: goldenrod;
+            
+        }
+        nav ul li a:hover{
+            color: white;
+        }
+        main{
+            display: flex;
+            padding-top: 4rem;
+            padding-left: 4rem;
+            padding-right: 4rem;
+        }
+        .form-section {
+            display: none;
+        }
+        .form-section input[type=text], input[type=email],input[type=number],input[type=date]{
+            width: 340px;
+            height: 20px;
+            border: 2px solid rgb(192,187,187);
+            border-radius: 4px;
+            margin-bottom: 19px;
+            padding-left: 0.6rem;
+            font-size: 16px;
+        }
+        .form-section.active {
+            display: block;
+        }
+        h4{
+            font-weight: 600;
+            color: gray;
+        }
+        .buttons {
+            overflow: auto;
+        }
+
+        .buttons button {
+            float: right;
+        }
+        button{
+            background-color: black;
+            color: white;
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin-top: 15px;
+        }
+        footer{
+            background-color: black;
+        }
+        @media screen and (max-width:960px) {
+           
+          nav ul {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background-color: black;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            padding-bottom: 2.3rem;
+          }
+          nav ul.show{
+            display: flex;
+
+          }
+          .menu-icon{
+            display: block;
+          }
+          .hero .hero_div .name{
+            width: 65%;
+        }
+        .aboutUs{
+            display: flex;
+            flex-direction: column;
+        }
+    .aboutUs .informationText{
+        width: 100%;
+    }.aboutUs .informationText h2{
+        color: #212529;
+        font-size: 2.1rem;
+    }
+    .aboutUs .informationImage{
+        width: 100%;
+    }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <nav> <a href="/" style="text-decoration: none; color: white;">
+            <div class="logo"><span class="logo_e">e</span>Sgela.com</div>
+        </a>
+           
+           <div class="menu-icon">&#9776;</div>
+           <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="#cardID">Courses</a></li>
+            <li><a href="#aboutID">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+           </ul>
+        </nav>
+        <main>
+            <div class="container">
+                <form action="/register" method="post">
+                    <!-- Personal Details Section -->
+                    <div class="form-section active">
+                        <h2>Personal Details</h2><br>
+                        <div class="details"><label for="">
+                            Title:
+                            <select name="title" id="" required>
+                                <option value=""></option>
+                                <option value="Mr">Mr</option>
+                                <option value="Mrs">Mrs</option>
+                                <option value="Miss">Miss</option>
+                                <option value="Doc">Doc</option>
+                                <option value="Prof">Prof</option>
+                            </select>
+                        </label>
+                            <br><br>
+                            <input type="text" name="name" placeholder="Enter Your Name" required>
+                            <input type="text" placeholder="Enter Your Surname" name="surname" required> 
+                        </div>
+                        <div class="details">
+                            <input type="text" placeholder="Enter SA ID Number" name="idNumber" id="idNumber" required>
+                            <input type="date" placeholder="Date of Birth" name="DOB" required>
+                        </div>
+                        <div class="details">
+                            <label for="marital"> Marital Status</label>
+                                <select name="marital" id="marital" required>
+                                    <option value=""></option>
+                                    <option value="single">Single</option>
+                                    <option value="married">Married</option>
+                                    <option value="devorced">Devorced</option>
+                                </select>
+                        <label for="language"> Home Language: </label>
+                            <select name="language" id="language" required>
+                                <option value=""></option>
+                                <option value="english">English</option>
+                                <option value="isiXhosa">IsiXhosa</option>
+                                <option value="sesotho">SeSotho</option>
+                                <option value="afrikaans">Afrikaans</option>
+                                <option value="isiZulu">IsiZulu</option>
+                                <option value="isiZulu">IsiZulu</option>
+                                <option value="sepedi">Sepedi</option>
+                                <option value="venda">Venda</option>
+                                <option value="Tsonga">Tsonga</option>
+                                <option value="Tswana">Tswana</option>
+                                <option value="ndebele">Ndebele</option>
+                            </select>
+                        </label>
+                        <label >Gender:</label>
+                        <label for="male">Male </label>
+                            <input type="radio" id="male" name="gender" value="male" required>
+                        <label for="female">Female </label>
+                            <input type="radio" id="female" name="gender" value="female" required>
+                        <label for="other">Rather not say </label>
+                            <input type="radio" id="other" name="gender" value="other" required>
+                        </div>
+                        <br><br>
+                        <h4>Contact Details</h4><br>
+                        <input type="number" name="mobile" placeholder="Enter Your Mobile Number" >
+                        <input type="number" name="altmobile" placeholder="Enter Alternative Number" ><br>
+                        <input type="email" name="email" placeholder="Enter Your Email Address">
+                        <h4>Address Details</h4><br>
+                        <label for="province">Please select Your Province Name:</label>
+                            <select name="province" id="province" required>
+                                <option value=""></option>
+                                <option value="Eastern Cape">Eastern Cape</option>
+                                <option value="Western Cape">Western Cape</option>
+                                <option value="Nort West">North West</option>
+                                <option value="Kwazulu Natal">Kwazulu Natal</option>
+                                <option value="Mpumalanga">Mpumalanga</option>
+                                <option value="Limpompo">Limpompo</option>
+                                <option value="Gauteng">Gauteng</option>
+                                <option value="Free State">Free State</option>
+                            </select>
+                        <input type="text" name="town" placeholder="Enter Your Town Name"><br>
+                        <input type="text" name="Suburb" placeholder="Enter Your Saburb Name">
+                        <input type="number" name="addressCode" name="code" placeholder="Enter Your Address Code" id="">
+                        
+                    </div>
+        
+                    <!-- Previous School Details Section -->
+                    <div class="form-section">
+                        <h2>Previous School Details</h2>
+                        <br><p>To calculate your Grade levels you must add all the levels obtained in each subject e.g 
+                            if your Maths is 5 and English is 5 that is 10 add all your subjects.</p>
+                        <br><br>
+                        <label for="education"> Highest Education Grade:</label>
+                        <select name="education" id="education" required>
+                            <option value=""></option>
+                            <option value="Grad 7">Grade 7</option>
+                            <option value="Grad 8">Grade 8</option>
+                            <option value="Grad 9">Grade 9</option>
+                            <option value="Grad 10">Grade 10</option>
+                            <option value="Grad 11">Grade 11</option>
+                            <option value="Grad 12">Grade 12</option>
+                        </select>
+                        <label for="eduYear"> Year Obtained</label>
+                                <select name="eduYear" id="eduYear" required>
+                                    <option value=""></option>
+                                    <option value="2010">2010</option>
+                                    <option value="2011">2011</option>
+                                    <option value="2012">2012</option>
+                                    <option value="2013">2013</option>
+                                    <option value="2014">2014</option>
+                                    <option value="2015">2015</option>
+                                    <option value="2016">2016</option>
+                                    <option value="2017">2017</option>
+                                    <option value="2018">2018</option>
+                                    <option value="2019">2019</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2024">2024</option>
+                                </select><br><br>
+                        <input type="text" name="school" placeholder="Enter Name of School" required>
+                        <input type="number" name="asp" placeholder="Enter Total of Your Grade levels" required><br><br>
+
+                        <label for="tertiary" id="tertiary">Do yu have a tertiary qualification ?</label>
+                        <select name="tertiary" id="tertiary" required>
+                            <option value=""></option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select><br>
+                        <p>If  yes:</p>
+                        <input type="text" name="qName" placeholder="Enter qualification name">
+                        <label for="qLevel">
+                            <select name="qLevel" id="qLevel">
+                                <option value=""></option>
+                                <option value="Higher Certificate">Higher Certificate</option>
+                                <option value="Diploma">Diploma</option>
+                                <option value="Bachelors">Bachelors</option>
+                                <option value="Honours">Honours</option>
+                                <option value="Masters">Masters</option>
+                            </select>
+                        </label>
+                    </div>
+                    <!-- Course Applying For Section -->
+                    <div class="form-section">
+                        <h2>Course Applying For</h2>
+                        <label for="course">Choose a course you are applying for:</label>
+                        <select name="Courses" id="" required>
+                            <option value=""></option>
+                            <option value="WebDevelopment">Web Development</option>
+                            <option value="python">Python for Data Science</option>
+                            <option value="pythonMachine">Machine Learning</option>
+                        </select>
+                        <br><br>
+                        <label for="password">Create Your Password:</label>
+                        <input id="password" placeholder="Enter your password" type="password" name="password">
+                    </div>
+        
+                    <!-- Upload Documents Section -->
+                    <div class="form-section">
+                        <h2>Upload Documents</h2>
+                        <br>
+                        <label>Upload your <strong>certified</strong> ID copy</label>
+                        <input type="file" name="idCopy" id="id-document" required>
+                        <br><br>
+                        <label>Upload your <strong>certified</strong> certificate copy</label>
+                        <input type="file" name="certificateCopy" id="parent-id-document" required>
+                        <br><br>
+                        <label>Upload<strong>certified</strong>Parent ID copy (optional)</label>
+                        <input type="file" name="parentID" id="certificate-document" required>
+
+                    </div>
+        
+                    <!-- Navigation Buttons -->
+                    <div class="buttons">
+                        <button type="button" id="prevBtn" onclick="prevSection()">Previous</button>
+                        <button type="button" id="nextBtn" onclick="nextSection()">Next</button>
+                    </div>
+                    <button type="submit" id="submit">Submit</button>
+                </form>
+        
+        </main>
+    </div>
+
+    <script>
+        document.querySelector('.menu-icon').addEventListener('click',() =>{
+            document.querySelector('nav ul').classList.toggle('show')
+        })
+
+        
+        let currentSection = 0;
+        showSection(currentSection);
+
+        function showSection(n) {
+            const sections = document.getElementsByClassName("form-section");
+            sections[n].classList.add("active");
+
+            if (n === 0) {
+                document.getElementById("prevBtn").style.display = "none";
+            } else {
+                document.getElementById("prevBtn").style.display = "inline";
+            }
+
+            if (n === (sections.length - 1)) {
+                document.getElementById("submit").style.display = "inline";
+                document.getElementById("prevBtn").style.display = "none";
+                document.getElementById("nextBtn").style.display = "none";
+            } else {
+                document.getElementById("submit").style.display = "none";
+            }
+        }
+
+        function nextSection() {
+            const sections = document.getElementsByClassName("form-section");
+            if (validateSection(currentSection)) {
+                sections[currentSection].classList.remove("active");
+                currentSection++;
+                if (currentSection >= sections.length) {
+                    document.getElementById("multi-section-form").submit();
+                    return false;
+                }
+                showSection(currentSection);
+            }
+        }
+
+        function prevSection() {
+            const sections = document.getElementsByClassName("form-section");
+            sections[currentSection].classList.remove("active");
+            currentSection--;
+            showSection(currentSection);
+        }
+
+        function validateSection(n) {
+            const inputs = document.getElementsByClassName("form-section")[n].getElementsByTagName("input");
+            for (let i = 0; i < inputs.length; i++) {
+                if (inputs[i].hasAttribute("required") && !inputs[i].value) {
+                    alert("Please fill in all required fields.");
+                    return false;
+                }
+            }
+            if (n === 0) {
+                const idNumber = document.getElementById("idNumber").value;
+                if (idNumber.length !== 13) {
+                    alert("Please enter a valid South African ID Number.");
+                    return false;
+                    
+                }
+                
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>
+
+<!--
+    
+-->
