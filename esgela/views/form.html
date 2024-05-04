@@ -69,7 +69,7 @@
         .form-section {
             display: none;
         }
-        .form-section input[type=text], input[type=email],input[type=number],input[type=date]{
+        .form-section input[type=text], input[type=email],input[type=number],input[type=date],input[type=password]{
             width: 340px;
             height: 20px;
             border: 2px solid rgb(192,187,187);
@@ -119,26 +119,19 @@
           nav ul.show{
             display: flex;
 
-          }
+          }.logo{
+            font-size: 1.2rem;
+        }
           .menu-icon{
             display: block;
           }
-          .hero .hero_div .name{
-            width: 65%;
+          main{
+            padding-left: 0.6rem;
+            padding-right:0.2px;
+          }
+          button{
+            margin-right: 40px;
         }
-        .aboutUs{
-            display: flex;
-            flex-direction: column;
-        }
-    .aboutUs .informationText{
-        width: 100%;
-    }.aboutUs .informationText h2{
-        color: #212529;
-        font-size: 2.1rem;
-    }
-    .aboutUs .informationImage{
-        width: 100%;
-    }
         }
     </style>
 </head>
@@ -285,7 +278,7 @@
                         </select><br>
                         <p>If  yes:</p>
                         <input type="text" name="qName" placeholder="Enter qualification name">
-                        <label for="qLevel">
+                        <label for="qLevel">Choose Your Qualification Level</label>
                             <select name="qLevel" id="qLevel">
                                 <option value=""></option>
                                 <option value="Higher Certificate">Higher Certificate</option>
@@ -294,7 +287,6 @@
                                 <option value="Honours">Honours</option>
                                 <option value="Masters">Masters</option>
                             </select>
-                        </label>
                     </div>
                     <!-- Course Applying For Section -->
                     <div class="form-section">

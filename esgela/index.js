@@ -66,7 +66,7 @@ app.post('/register', async (req,res)=>{
             Course: applicant.Course,surname: applicant.surname,title:applicant.title,certificateCopy: applicant.certificateCopy
         })
     } catch(err){
-        console.log(err)
+        res.status(404).send(`Technical error our team is currently working on it. sorry for any conviniences caused`)
     }
 })
 function studentNumberGenerator(){
@@ -107,7 +107,7 @@ app.post('/login', async (req,res)=>{
             })
         }
     } catch(err){
-        console.log(err)
+        res.send(`Technical error our team is currently working on it. sorry for any conviniences caused`)
     }
 })
 app.get('/admin',(req,res)=>{
@@ -137,7 +137,7 @@ app.post('/admin',async (req,res)=>{
         }
         
     }catch(err){
-        res.send(err)
+        res.send(`Technical error our team is currently working on it. sorry for any conviniences caused`)
     }
     
 })
@@ -152,7 +152,7 @@ app.get('/adminInfo', (req, res) => {
         })
         .catch(err => {
             console.error(err);
-            res.status(500).send('Internal Server Error');
+            res.status(500).send(`Technical error our team is currently working on it. sorry for any conviniences caused <br><br> <a href='/'>Back</a>`);
         });
 });
 app.listen(port,()=>{
