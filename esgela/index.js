@@ -137,7 +137,10 @@ app.post('/admin',async (req,res)=>{
         }
         
     }catch(err){
-        res.send(`Technical error our team is currently working on it. sorry for any conviniences caused`)
+        let error = 'Technical error our team is currently working on it. sorry for any conviniences caused'
+        res.render('adminLogin',{
+            message:error
+        })
     }
     
 })
