@@ -116,48 +116,49 @@ app.get('/admin',(req,res)=>{
         message:error
     })
 })
-app.post('/admin',async (req,res)=>{
+app.post('/admin', async (req, res) => {
     try {
+        const checkadmin = await adminModal.findOne({ username: req.body.username });
 
-        const checkadmin = await adminModal.findOne({username:req.body.username})
+        console.log("checkadmin:", checkadmin);
 
-        if(checkadmin.password===req.body.password){
-            applicantModal.find()
-            .then(applicants => {
-                res.render('admin', {
-                    applicantsList: applicants
+        if (checkadmin) {
+            console.log("Entered checkadmin block");
+            console.log("checkadmin.password:", checkadmin.password);
+            console.log("req.body.password:", req.body.password);
+
+            if (checkadmin.password === req.body.password) {
+                console.log("Passwords match");
+                applicantModal.find()
+                    .then(applicants => {
+                        res.render('admin', {
+                            applicantsList: applicants
+                        });
+                    });
+            } else {
+                console.log("Passwords don't match");
+                let error = 'Admin details incorrect';
+                res.render('adminLogin', {
+                    message: error
                 });
-            })
-        }else{
-            let error = 'Admin details incorrect'
-            res.render('adminLogin',{
-                message:error
-            })
-            
-        }
-        
-    }catch(err){
-        let error = 'Technical error our team is currently working on it. sorry for any conviniences caused'
-        res.render('adminLogin',{
-            message:error
-        })
-    }
-    
-})
-
-app.get('/adminInfo', (req, res) => {
-
-    applicantModal.find()
-        .then(applicants => {
-            res.render('admin', {
-                applicantsList: applicants
+            }
+        } else {
+            console.log("Admin not found");
+            let error = 'Admin details incorrect';
+            res.render('adminLogin', {
+                message: error
             });
-        })
-        .catch(err => {
-            console.error(err);
-            res.status(500).send(`Technical error our team is currently working on it. sorry for any conviniences caused <br><br> <a href='/'>Back</a>`);
+        }
+    } catch (err) {
+        console.log("Error:", err);
+        let error = 'Technical error our team is currently working on it. sorry for any conviniences caused';
+        res.render('adminLogin', {
+            message: error
         });
+    }
 });
+  
+
 app.listen(port,()=>{
     console.log(`Server connected to Port ${port}`)
 })
