@@ -13,7 +13,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //using css from the public folder
 app.use('public/style/style.css',express.static(path.join(__dirname +'public/style/style.css')));
 //importing from env
-db = process.env.MONGO_URL;
+db = process.env.database;
 port = process.env.PORT;
 // seting ejs
 app.set('view engine', 'ejs');
