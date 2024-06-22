@@ -3,196 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Esgela.com Home</title>
-    <link rel="stylesheet" href="/public/style/style.css">
-    <style>
-        *{
-            padding: 0;
-            margin: 0;
-            font-family: sans-serif;
-        }
-        .container{
-            min-height: 100vh;
-            display: grid;
-            grid-template-rows: 60px 1fr 40px;
-            grid-template-columns: 1fr;
-        }
-        .menu-icon{
-            display: none;
-        }
-        .logo_e{
-            background-color: goldenrod;
-            color: black;
-            padding-left: 8px;
-            padding-right: 8px;
-            margin-right: 4px;
-        }
-        .logo{
-            font-size: 2.3rem;
-            padding-top: 1px;
-            padding-bottom: 1px;
-
-        }
-        nav{
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: black;
-            color: white;
-            padding: 1rem 2.5rem;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2),0 6px 2px 0 rgba(0,0,0,0.2);
-            z-index: 100000;
-        }
-        nav ul{
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-        }
-        nav ul li{
-            margin-right: 20px;
-        }
-        nav ul li a{
-            text-decoration: none;
-            color: goldenrod;
-            background-color: white;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 18px;
-            font-weight: 600;
-            
-        }
-        nav ul li a:hover{
-            color: white;
-        }main{
-            padding: 8rem;
-            display: flex;
-            flex-direction: column;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        tr:hover {
-            background-color: #ddd;
-        }
-        footer{
-            background-color: black;
-        }
-        @media screen and (max-width:960px) {
-           
-          nav ul {
-            display: none;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            background-color: black;
-            position: absolute;
-            top: 60px;
-            left: 0;
-            width: 100%;
-            padding-bottom: 2.3rem;
-          }
-          nav ul.show{
-            display: flex;
-
-          }
-          .menu-icon{
-            display: block;
-        }main{
-            padding:1.2rem 0 6rem 0;
-          }
-          th{
-            font-size:13px;
-          }
-          td{
-            font-size: 13px;
-          }
-         }@media screen and (max-width:960px) {
-            main{
-                padding-top: 6rem;
-                padding-left: 0.2rem;
-                padding-right: 0.2rem;
-            }
-            th{
-                font-size: 9px;
-            } td{
-                font-size: 9px;
-            }
-         }
-    </style>
+    <title>Esgela.com - Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
-<body>
-
-        <nav>
-           <div class="logo">
-            <a href="#" style="text-decoration: none; color: white;">
-                <span class="logo_e">e</span>Sgela.com
-            </a>
-        </div>
-           <div class="menu-icon">&#9776;</div>
-           <ul>
-           
-            <li><a href="/">logout</a></li>
-           </ul>
-        </nav>
-        <main>
-            <h2>Student Table</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Surname</th>
-                <th>Student Number</th>
-                <th>ID Number</th>
-                <th>Privious School</th>
-                <th>ASP</th>
-                <th>Tertial level</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <%applicantsList.forEach(applicant => {%>
-                    <td><%=applicant.name%> </td>
-                    <td><%=applicant.surname%></td>
-                    <td> <%=applicant.studentNumber%></td>
-                    <td><%=applicant.idNumber%></td>
-                    <td><%=applicant.school%></td>
-                    <td><%=applicant.education%> - <%=applicant.asp%></td>
-                    <td><%=applicant.tertiary%></td>
-            </tr>
-                <%})%>
-                
-        </tbody>
-    </table>
-
-         
-        </main>
-        <footer></footer>
+<body class="bg-white">
+ <!-- Navigation -->
+ <nav class="bg-black text-white shadow-lg z-50">
+    <div class="flex items-center justify-between px-4 py-3">
+        <a href="/" class="text-3xl font-bold flex items-center">
+            <span class="bg-yellow-400 text-black px-2 py-1 text-2xl rounded-sm mr-2">e</span>
+            Sgela.com
+        </a>
+        <ul class="lg:flex items-center space-x-6">
+            <li><a style="color: #ffbb00;" href="/" class="bg-white px-3 py-2 rounded-md font-semibold hover:text-black">Logout</a></li>  
+        </ul>
     </div>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3539893980478212"
-     crossorigin="anonymous"></script>
-    <script>
-        document.querySelector('.menu-icon').addEventListener('click',() =>{
-            document.querySelector('nav ul').classList.toggle('show')
-        })
-    </script>
+    <!-- Mobile Menu -->
+    <ul class="mobile-menu lg:hidden hidden bg-black text-white px-4 py-2">
+        <li><a style="color: #ffbb00;" href="/" class="bg-white px-3 py-2 rounded-md font-semibold hover:text-black">Logout</a></li>
+    </ul>
+</nav>
+    <!-- Main Content -->
+    <main class="p-8 md:mb-24 md:mt-16">
+        <% if (applicants && applicants.length > 0) { %>
+            <h2 class="text-2xl font-bold mb-4 mt-16+">Student Table</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full table-auto border-collapse border border-gray-200">
+                    <thead>
+                        <tr class="bg-gray-100">
+                            <th class="border border-gray-300 px-4 py-2">Name</th>
+                            <th class="border border-gray-300 px-4 py-2">Surname</th>
+                            <th class="border border-gray-300 px-4 py-2">Student Number</th>
+                            <th class="border border-gray-300 px-4 py-2">ID Number</th>
+                            <th class="border border-gray-300 px-4 py-2">Previous School</th>
+                            <th class="border border-gray-300 px-4 py-2">ASP</th>
+                            <th class="border border-gray-300 px-4 py-2">Tertiary Level</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% applicants.forEach(applicant => { %>
+                            <tr class="hover:bg-gray-200">
+                                <td class="border border-gray-300 px-4 py-2"><%= applicant.name %></td>
+                                <td class="border border-gray-300 px-4 py-2"><%= applicant.surname %></td>
+                                <td class="border border-gray-300 px-4 py-2"><%= applicant.studentNumber %></td>
+                                <td class="border border-gray-300 px-4 py-2"><%= applicant.idNumber %></td>
+                                <td class="border border-gray-300 px-4 py-2"><%= applicant.school %></td>
+                                <td class="border border-gray-300 px-4 py-2"><%= applicant.education %> - <%= applicant.asp %></td>
+                                <td class="border border-gray-300 px-4 py-2"><%= applicant.tertiary %></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        <% } else { %>
+            <div class="p-8 md:mb-24 md:mt-16">
+                <p class="text-xl font-bold mb-4">No students available.</p>
+                <p class="text-gray-600">Please check back later for updated student information.</p>
+            </div>
+        <% } %>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-black text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4" style="color: #ffbb00">About Esgela</h3>
+                    <p class="text-gray-400">Esgela is a leading online learning platform offering a wide range of courses in various fields. Our mission is to empower individuals through education, providing accessible and affordable learning opportunities for everyone.</p>
+                    <div class="mt-4">
+                    <a href="#" class="text-blue-600 hover:text-white mr-4"><i class="fab fa-facebook-f md:text-2xl"></i></a>
+                    <a href="#" class="text-blue-400 hover:text-white mr-4"><i class="fab fa-linkedin md:text-2xl"></i></a>
+                    <a style="color: #ffbb00;" href="#" class="hover:text-white mr-4"><i class="fab fa-git md:text-2xl"></i></a>
+                    <a href="#" class="text-red-600 hover:text-white mr-4"><i class="fab fa-youtube md:text-2xl"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4" style="color: #ffbb00">Contact Us</h3>
+                    <p class="text-gray-400">Have questions or need support? Reach out to our team:</p>
+                    <ul class="mt-4">
+                    <li><i style="color:#ffbb00;" class="fas fa-envelope mr-2"></i> Zibekeonwabe@esgela.com</li>
+                    <li><i style="color:#ffbb00;" class="fas fa-phone mr-2"></i> +27   (78) 430-00901</li></ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4" style="color: #ffbb00">Subscribe</h3>
+                    <p class="text-gray-400 mb-4">Subscribe to our newsletter for updates on new courses and promotions.</p>
+                    <form action="#" method="post">
+                        <input type="email" name="email" id="email" placeholder="Your email"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:border-black">
+                        <button type="submit"
+                            class="btnSubmit text-white rounded-md px-4 py-2 hover:bg-gray-800 focus:outline-none focus:bg-gray-800 transition duration-300 ease-in-out" style='background:#ffbb00;'>Subscribe</button>
+                    </form>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4" style="color: #ffbb00">Legal</h3>
+                    <ul>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
-
- 

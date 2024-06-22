@@ -4,19 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Esgela.com - Admin Login</title>
-    <!-- Link to Tailwind CSS -->
+    <title>404 Page Not Found - Esgela.com</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <!-- Link to Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Additional custom styles can be added here */
+    </style>
 </head>
 
-<body class="bg-gray-100">
- <!-- Navigation -->
- <nav class="bg-black text-white shadow-lg z-50">
+<body class="bg-white">
+<!-- Navigation -->
+<nav class="bg-black text-white shadow-lg z-50">
     <div class="flex items-center justify-between px-4 py-3">
-        <a href="/" class="md:text-3xl font-bold flex items-center">
-            <span class="bg-yellow-400 text-black px-2 py-1 text-2xl rounded-sm mr-2">e</span>
+        <a href="/" class="md:text-3xl  font-bold flex items-center">
+            <span class="bg-yellow-400 text-black px-2 py-1 md:text-2xl rounded-sm mr-2">e</span>
             Sgela.com
         </a>
         <!-- Mobile Menu Toggle Button -->
@@ -43,22 +44,13 @@
     </ul>
 </nav>
 
-    <!-- Main Content -->
-    <main class="md:px-8 py-16 flex flex-col items-center">
-        <h2 class="text-3xl font-bold mb-4">Admin Login</h2>
-        <p class="text-gray-600 mb-8">Please Login with your Admin Username and Password</p>
-        <form action="/admin" method="post" class="text-left w-full max-w-md">
-            <label for="username" class="block mb-2">Username:</label>
-            <input type="text" name="username" id="username" required
-                class="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:border-black">
-            <label for="password" class="block mb-2">Enter your Password:</label>
-            <input type="password" name="password" id="password" required
-                class="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:border-black">
-            <span class="text-red-500 block mb-4"><%=message%></span>
-            <a href="/login" class="text-gray-700 hover:underline mb-4 mt-4 mr-4" >Check Status</a>
-            <button type="submit"
-                class="btnSubmit bg-black text-white rounded-md px-4 py-2 hover:bg-gray-800 focus:outline-none focus:bg-gray-800 transition duration-300 ease-in-out">LOGIN</button>
-        </form>
+    <!-- Main Content - 404 Page -->
+    <main class="p-8 md:mb-24 md:mt-16">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl font-bold text-red-600 mb-4">404 - Page Not Found</h1>
+            <p class="text-lg text-gray-600 mb-4">The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+            <a href="/" class="text-blue-600 hover:text-blue-800">Return to Homepage</a>
+        </div>
     </main>
 
     <!-- Footer -->
@@ -69,18 +61,19 @@
                     <h3 class="text-xl font-semibold mb-4" style="color: #ffbb00">About Esgela</h3>
                     <p class="text-gray-400">Esgela is a leading online learning platform offering a wide range of courses in various fields. Our mission is to empower individuals through education, providing accessible and affordable learning opportunities for everyone.</p>
                     <div class="mt-4">
-                    <a href="#" class="text-blue-600 hover:text-white mr-4"><i class="fab fa-facebook-f md:text-2xl"></i></a>
-                    <a href="#" class="text-blue-400 hover:text-white mr-4"><i class="fab fa-linkedin md:text-2xl"></i></a>
-                    <a style="color: #ffbb00;" href="#" class="hover:text-white mr-4"><i class="fab fa-git md:text-2xl"></i></a>
-                    <a href="#" class="text-red-600 hover:text-white mr-4"><i class="fab fa-youtube md:text-2xl"></i></a>
+                        <a href="#" class="text-blue-600 hover:text-white mr-4"><i class="fab fa-facebook-f md:text-2xl"></i></a>
+                        <a href="#" class="text-blue-400 hover:text-white mr-4"><i class="fab fa-linkedin md:text-2xl"></i></a>
+                        <a style="color: #ffbb00;" href="#" class="hover:text-white mr-4"><i class="fab fa-git md:text-2xl"></i></a>
+                        <a href="#" class="text-red-600 hover:text-white mr-4"><i class="fab fa-youtube md:text-2xl"></i></a>
                     </div>
                 </div>
                 <div>
                     <h3 class="text-xl font-semibold mb-4" style="color: #ffbb00">Contact Us</h3>
                     <p class="text-gray-400">Have questions or need support? Reach out to our team:</p>
                     <ul class="mt-4">
-                    <li><i style="color:#ffbb00;" class="fas fa-envelope mr-2"></i> Zibekeonwabe@esgela.com</li>
-                    <li><i style="color:#ffbb00;" class="fas fa-phone mr-2"></i> +27   (78) 430-00901</li></ul>
+                        <li><i style="color:#ffbb00;" class="fas fa-envelope mr-2"></i> Zibekeonwabe@esgela.com</li>
+                        <li><i style="color:#ffbb00;" class="fas fa-phone mr-2"></i> +27   (78) 430-00901</li>
+                    </ul>
                 </div>
                 <div>
                     <h3 class="text-xl font-semibold mb-4" style="color: #ffbb00">Subscribe</h3>
@@ -102,14 +95,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- JavaScript for mobile menu toggle -->
-    <script>
-        document.querySelector('.menu-icon').addEventListener('click', () => {
-            document.querySelector('ul.mobile-menu').classList.toggle('hidden');
-        });
-    </script>
-
 </body>
 
 </html>

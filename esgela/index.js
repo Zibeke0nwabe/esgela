@@ -13,9 +13,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 //using css from the public folder
 app.use('public/style/style.css',express.static(path.join(__dirname +'public/style/style.css')));
 //importing from env
-db = process.env.database;
+db = process.env.MONGO_URL;
 port = process.env.PORT;
-// seting ejs
+// setting ejs
 app.set('view engine', 'ejs');
 //connecting to mongoDB
 mongoose.connect(db).then(()=>{
@@ -66,7 +66,7 @@ app.post('/register', async (req,res)=>{
             Course: applicant.Course,surname: applicant.surname,title:applicant.title,certificateCopy: applicant.certificateCopy
         })
     } catch(err){
-        res.status(404).send(`Technical error our team is currently working on it. sorry for any conviniences caused`)
+        res.status(404).res.sendFile(__dirname +'/views/error.html')
     }
 })
 function studentNumberGenerator(){
@@ -107,7 +107,7 @@ app.post('/login', async (req,res)=>{
             })
         }
     } catch(err){
-        res.send(`Technical error our team is currently working on it. sorry for any conviniences caused`)
+        res.status(404).res.sendFile(__dirname +'/views/error.html')
     }
 })
 app.get('/admin',(req,res)=>{
@@ -121,6 +121,7 @@ app.post('/admin', async (req, res) => {
         const checkadmin = await adminModal.findOne({ username: req.body.username });
 
         console.log("checkadmin:", checkadmin);
+        let applicants = ''
 
         if (checkadmin) {
             console.log("Entered checkadmin block");
@@ -132,7 +133,7 @@ app.post('/admin', async (req, res) => {
                 applicantModal.find()
                     .then(applicants => {
                         res.render('admin', {
-                            applicantsList: applicants
+                            applicants: applicants
                         });
                     });
             } else {
@@ -149,16 +150,14 @@ app.post('/admin', async (req, res) => {
                 message: error
             });
         }
-    } catch (err) {
-        console.log("Error:", err);
-        let error = 'Technical error our team is currently working on it. sorry for any conviniences caused';
-        res.render('adminLogin', {
-            message: error
-        });
+    } catch(err){
+        res.status(404).sendFile(__dirname +'/views/error.html')
     }
 });
   
-
+app.use((req, res, next) => {
+    res.status(404).sendFile(__dirname +'/views/error.html');
+  });
 app.listen(port,()=>{
     console.log(`Server connected to Port ${port}`)
 })

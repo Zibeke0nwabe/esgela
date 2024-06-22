@@ -1,157 +1,112 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Esgela.com Home</title>
-    <link rel="stylesheet" href="/public/style/style.css">
-    <style>
-        *{
-            padding: 0;
-            margin: 0;
-            font-family: sans-serif;
-        }
-        .container{
-            min-height: 100vh;
-            display: grid;
-            grid-template-rows: 60px 1fr 40px;
-            grid-template-columns: 1fr;
-        }
-        .menu-icon{
-            display: none;
-        }
-        .logo_e{
-            background-color: goldenrod;
-            color: black;
-            padding-left: 8px;
-            padding-right: 8px;
-            margin-right: 4px;
-        }
-        .logo{
-            font-size: 2.3rem;
-            padding-top: 1px;
-            padding-bottom: 1px;
-
-        }
-        nav{
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: black;
-            color: white;
-            padding: 1rem 2.5rem;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2),0 6px 2px 0 rgba(0,0,0,0.2);
-            z-index: 100000;
-        }
-        nav ul{
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-        }
-        nav ul li{
-            margin-right: 20px;
-        }
-        nav ul li a{
-            text-decoration: none;
-            color: goldenrod;
-            
-        }
-        nav ul li a:hover{
-            color: white;
-        }main{
-            padding: 8rem;
-            display: flex;
-            flex-direction: column;
-        }
-        form input{
-            width: 340px;
-            height: 20px;
-            border: 2px solid rgb(192,187,187);
-            border-radius: 4px;
-            margin-bottom: 19px;
-            font-weight: 600;
-            padding-left: 1.1rem;
-            font-size: 16px;
-        }
-        .btnSubmit{
-            background-color: black;
-            color: white;
-            border-radius: 5px;
-            padding: 5px 10px;
-            margin-top: 15px;
-        }
-        @media screen and (max-width:960px) {
-           
-          nav ul {
-            display: none;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            background-color: black;
-            position: absolute;
-            top: 60px;
-            left: 0;
-            width: 100%;
-            padding-bottom: 2.3rem;
-          }
-          nav ul.show{
-            display: flex;
-
-          }
-          .menu-icon{
-            display: block;
-          }
-          main{
-            padding-left: 1.2rem;
-          }
-        }
-    </style>
+    <title>Esgela.com - Login</title>
+    <!-- Link to Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Link to Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
-<body>
 
-        <nav>
-           <div class="logo">
-            <a href="/" style="text-decoration: none; color: white;">
-                <span class="logo_e">e</span>Sgela.com
+<body class="bg-gray-100">
+     <!-- Navigation -->
+     <nav class="bg-black text-white shadow-lg z-50">
+        <div class="flex items-center justify-between px-4 py-3">
+            <a href="/" class="md:text-3xl  font-bold flex items-center">
+                <span class="bg-yellow-400 text-black px-2 py-1 md:text-2xl rounded-sm mr-2">e</span>
+                Sgela.com
             </a>
+            <!-- Mobile Menu Toggle Button -->
+            <div class="lg:hidden">
+                <button class="menu-icon text-white focus:outline-none text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <ul class="hidden lg:flex items-center space-x-6">
+                <li><a href="/" class="hover:text-white">Home</a></li>
+                <li><a href="/" class="hover:text-white">Courses</a></li>
+                <li><a href="/" class="hover:text-white">About</a></li>
+                <li><a href="/login" style="color:#ffbb00;" class="hover:text-white font-bold">Login</a></li>
+                <li><a href="/register" style="color:#ffbb00;" class="hover:text-white font-bold" >Apply</a></li>
+            </ul>
         </div>
-           <div class="menu-icon">&#9776;</div>
-           <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="#cardID">Courses</a></li>
-            <li><a href="#aboutID">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
-           </ul>
-        </nav>
-        <main>
-            
-            <h2>Check Status</h2>
-            <p>Check with ID number or your Student number and Password</p>
-            <form action="/login" method="post">
-                <br>
-                <label for="identifier">ID number or Student number:</label><br>
-                <input type="text" name="identifier" id="identifier" required>
-                <br>
-                <label for="password">Enter your Password:</label><br>
-                <input type="password" name="password" id="password" required>
-                <br>
-                <span style="color: red;"><%=message%></span>
-                <br>
-                <a href="/admin">Admin</a>
-                <button type="submit" class="btnSubmit">Check</button>
+        <!-- Mobile Menu -->
+        <ul class="mobile-menu lg:hidden hidden bg-black text-white px-4 py-2">
+            <li><a href="/" class="block py-2 hover:text-gray-400">Home</a></li>
+            <li><a href="/" class="block py-2 hover:text-gray-400">Courses</a></li>
+            <li><a href="/" class="block py-2 hover:text-gray-400">About</a></li>
+            <li><a href="/login" style="color:#ffbb00;" class="block py-2 hover:text-gray-400">Login</a></li>
+            <li><a href="/register" style="color:#ffbb00;" class="block py-2 hover:text-gray-400">Apply</a></li>
+        </ul>
+    </nav>
 
-            </form>
-        </main>
-        <footer></footer>
-    </div>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3539893980478212"
-     crossorigin="anonymous"></script>
+    <!-- Main Content -->
+    <main class="px-8 md:py-16 flex flex-col items-center">
+        <h2 class="text-3xl font-bold mb-4">Check Status</h2>
+        <p class="text-gray-600 mb-8">Check with ID number or your Student number and Password</p>
+        <form action="/login" method="post" class="text-left w-full max-w-md">
+            <label for="identifier" class="block mb-2">ID number or Student number:</label>
+            <input type="text" name="identifier" id="identifier" required
+                class="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:border-black">
+            <label for="password" class="block mb-2">Enter your Password:</label>
+            <input type="password" name="password" id="password" required
+                class="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:border-black">
+            <span class="text-red-500 block mb-4"><%=message%></span>
+            <a href="/admin" class="text-gray-700 hover:underline mb-4 mt-4 mr-4" >Admin Login</a>
+            <button type="submit"
+                class="btnSubmit bg-black text-white rounded-md px-4 py-2 hover:bg-gray-800 focus:outline-none focus:bg-gray-800 transition duration-300 ease-in-out">Check</button>
+        </form>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-black text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4" style="color: #ffbb00">About Esgela</h3>
+                    <p class="text-gray-400">Esgela is a leading online learning platform offering a wide range of courses in various fields. Our mission is to empower individuals through education, providing accessible and affordable learning opportunities for everyone.</p>
+                    <div class="mt-4">
+                    <a href="#" class="text-blue-600 hover:text-white mr-4"><i class="fab fa-facebook-f md:text-2xl"></i></a>
+                    <a href="#" class="text-blue-400 hover:text-white mr-4"><i class="fab fa-linkedin md:text-2xl"></i></a>
+                    <a style="color: #ffbb00;" href="#" class="hover:text-white mr-4"><i class="fab fa-git md:text-2xl"></i></a>
+                    <a href="#" class="text-red-600 hover:text-white mr-4"><i class="fab fa-youtube md:text-2xl"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4" style="color: #ffbb00">Contact Us</h3>
+                    <p class="text-gray-400">Have questions or need support? Reach out to our team:</p>
+                    <ul class="mt-4">
+                    <li><i style="color:#ffbb00;" class="fas fa-envelope mr-2"></i> Zibekeonwabe@esgela.com</li>
+                    <li><i style="color:#ffbb00;" class="fas fa-phone mr-2"></i> +27   (78) 430-00901</li></ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4" style="color: #ffbb00">Subscribe</h3>
+                    <p class="text-gray-400 mb-4">Subscribe to our newsletter for updates on new courses and promotions.</p>
+                    <form action="#" method="post">
+                        <input type="email" name="email" id="email" placeholder="Your email"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:border-black">
+                        <button type="submit"
+                            class="btnSubmit text-white rounded-md px-4 py-2 hover:bg-gray-800 focus:outline-none focus:bg-gray-800 transition duration-300 ease-in-out" style='background:#ffbb00;'>Subscribe</button>
+                    </form>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4" style="color: #ffbb00">Legal</h3>
+                    <ul>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- JavaScript for mobile menu toggle -->
     <script>
-        document.querySelector('.menu-icon').addEventListener('click',() =>{
-            document.querySelector('nav ul').classList.toggle('show')
-        })
+        document.querySelector('.menu-icon').addEventListener('click', () => {
+            document.querySelector('.mobile-menu').classList.toggle('hidden');
+        });
     </script>
 </body>
 </html>
