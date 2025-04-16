@@ -3,110 +3,75 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Esgela.com - Login</title>
-    <!-- Link to Tailwind CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <!-- Link to Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
 </head>
 
-<body class="bg-gray-100">
-     <!-- Navigation -->
-     <nav class="bg-black text-white shadow-lg z-50">
-        <div class="flex items-center justify-between px-4 py-3">
-            <a href="/" class=" md:text-3xl font-bold flex items-center">
-                <span class="bg-yellow-400 text-black px-2 py-1 text-2xl rounded-sm mr-2">e</span>
+<body class="font-sans">
+
+    <!-- Navigation -->
+    <nav class="bg-black text-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+            <a href="/" class="text-2xl font-bold flex items-center">
+                <span class="bg-yellow-400 text-black px-2 py-1 rounded-sm mr-2">e</span>
                 Sgela.com
             </a>
-            <!-- Mobile Menu Toggle Button -->
-            <div class="lg:hidden">
-                <button class="menu-icon text-white focus:outline-none">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
-            </div>
-            <ul class="hidden lg:flex items-center space-x-6">
-                <li><a href="/" class="hover:text-white">Home</a></li>
-                <li><a href="/" class="hover:text-white">Courses</a></li>
-                <li><a href="/" class="hover:text-white">About</a></li>
-                <li><a href="/login" style="color:#ffbb00;" class="hover:text-white font-bold">Login</a></li>
-                <li><a href="/register" style="color:#ffbb00;" class="hover:text-white font-bold" >Apply</a></li>
+            <ul class="hidden md:flex space-x-6 text-sm">
+                <li><a href="/" class="hover:text-yellow-400">Home</a></li>
+                <li><a href="/" class="hover:text-yellow-400">Courses</a></li>
+                <li><a href="/" class="hover:text-yellow-400">About</a></li>
+                <li><a href="/login" class="text-yellow-400 font-semibold">Login</a></li>
+                <li><a href="/register" class="text-yellow-400 font-semibold">Apply</a></li>
             </ul>
         </div>
-        <!-- Mobile Menu -->
-        <ul class="mobile-menu lg:hidden hidden bg-black text-white px-4 py-2">
-            <li><a href="/" class="block py-2 hover:text-gray-400">Home</a></li>
-            <li><a href="/" class="block py-2 hover:text-gray-400">Courses</a></li>
-            <li><a href="/" class="block py-2 hover:text-gray-400">About</a></li>
-            <li><a href="/login" style="color:#ffbb00;" class="block py-2 hover:text-gray-400">Login</a></li>
-            <li><a href="/register" style="color:#ffbb00;" class="block py-2 hover:text-gray-400">Apply</a></li>
-        </ul>
     </nav>
 
-    <!-- Main Content -->
-    <main class="px-8 md:py-16 flex flex-col items-center">
-        <h2 class="text-3xl font-bold mb-4 mt-4">Check Status</h2>
-        <p class="text-gray-600 mb-8">Check with ID number or your Student number and Password</p>
-        <form action="/login" method="post" class="text-left w-full max-w-md">
-            <label for="identifier" class="block mb-2">ID number or Student number:</label>
-            <input type="text" name="identifier" id="identifier" required
-                class="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:border-black">
-            <label for="password" class="block mb-2">Enter your Password:</label>
-            <input type="password" name="password" id="password" required
-                class="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:border-black">
-            <span class="text-red-500 block mb-4"><%=message%></span>
-            <a href="/admin" class="text-gray-700 hover:underline mb-8 mt-4 mr-4" >Admin Login</a>
-            <button type="submit"
-                class="btnSubmit mb-8 bg-black text-white rounded-md px-4 py-2 hover:bg-gray-800 focus:outline-none focus:bg-gray-800 transition duration-300 ease-in-out">Check</button>
-        </form>
-    </main>
-    <!-- Footer -->
-    <footer class="bg-black text-white py-8">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-xl font-semibold mb-4" style="color: #ffbb00">About Esgela</h3>
-                    <p class="text-gray-400">Esgela is a leading online learning platform offering a wide range of courses in various fields. Our mission is to empower individuals through education, providing accessible and affordable learning opportunities for everyone.</p>
-                    <div class="mt-4">
-                    <a href="#" class="text-blue-600 hover:text-white mr-4"><i class="fab fa-facebook-f md:text-2xl"></i></a>
-                    <a href="#" class="text-blue-400 hover:text-white mr-4"><i class="fab fa-linkedin md:text-2xl"></i></a>
-                    <a style="color: #ffbb00;" href="#" class="hover:text-white mr-4"><i class="fab fa-git md:text-2xl"></i></a>
-                    <a href="#" class="text-red-600 hover:text-white mr-4"><i class="fab fa-youtube md:text-2xl"></i></a>
-                    </div>
+    <!-- Main Section -->
+    <main class="flex flex-col lg:flex-row items-center justify-center min-h-screen px-6 lg:px-20 py-16">
+        <!-- Form Section -->
+        <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
+            <h2 class="text-3xl font-bold mb-2 text-center text-gray-800">Welcome Back</h2>
+            <p class="text-sm text-gray-600 mb-6 text-center">Login with your ID or Student number and password</p>
+            <form action="/login" method="POST">
+                <label for="identifier" class="block text-sm font-medium text-gray-700 mb-1">ID / Student Number</label>
+                <input type="text" id="identifier" name="identifier" required
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:border-black">
+
+                <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                <input type="password" id="password" name="password" required
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:border-black">
+
+                <!-- Display message (dynamic server-side message) -->
+                <span class="text-red-500 block mb-4"><%= message %></span>
+
+                <div class="flex justify-between items-center mb-6">
+                    <a href="/admin" class="text-sm italic font-semibold text-black  hover:text-gray-700 transition">Admin Login</a>
                 </div>
-                <div>
-                    <h3 class="text-xl font-semibold mb-4" style="color: #ffbb00">Contact Us</h3>
-                    <p class="text-gray-400">Have questions or need support? Reach out to our team:</p>
-                    <ul class="mt-4">
-                    <li><i style="color:#ffbb00;" class="fas fa-envelope mr-2"></i> Zibekeonwabe@esgela.com</li>
-                    <li><i style="color:#ffbb00;" class="fas fa-phone mr-2"></i> +27   (78) 430-00901</li></ul>
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold mb-4" style="color: #ffbb00">Subscribe</h3>
-                    <p class="text-gray-400 mb-4">Subscribe to our newsletter for updates on new courses and promotions.</p>
-                    <form action="#" method="post">
-                        <input type="email" name="email" id="email" placeholder="Your email"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:border-black">
-                        <button type="submit"
-                            class="btnSubmit text-white rounded-md px-4 py-2 hover:bg-gray-800 focus:outline-none focus:bg-gray-800 transition duration-300 ease-in-out" style='background:#ffbb00;'>Subscribe</button>
-                    </form>
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold mb-4" style="color: #ffbb00">Legal</h3>
-                    <ul>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
-                    </ul>
-                </div>
+
+                <button type="submit"
+                    class="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 transition duration-300">Login</button>
+            </form>
+        </div>
+
+        <!-- Content Section -->
+        <div class="mt-12 lg:mt-0 lg:ml-16 max-w-xl text-center lg:text-left">
+            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Why Esgela?</h3>
+            <ul class="space-y-3 text-gray-600">
+                <li><i class="fas fa-check-circle text-yellow-500 mr-2"></i> Access accredited online courses</li>
+                <li><i class="fas fa-check-circle text-yellow-500 mr-2"></i> Learn from top instructors and industry experts</li>
+                <li><i class="fas fa-check-circle text-yellow-500 mr-2"></i> Track your progress and get certified</li>
+                <li><i class="fas fa-check-circle text-yellow-500 mr-2"></i> Join a growing community of learners</li>
+            </ul>
+
+            <div class="mt-8 p-4 border-l-4 border-yellow-400 bg-yellow-50 rounded">
+                <p class="text-sm text-gray-800 italic">“Esgela has transformed the way I learn. The platform is easy to use, and the content is top-notch!”</p>
+                <p class="mt-2 font-bold text-sm text-gray-700">— Simanga Luxolo, Software Development Student</p>
             </div>
         </div>
-    </footer>
-    <!-- JavaScript for mobile menu toggle -->
-    <script>
-        document.querySelector('.menu-icon').addEventListener('click', () => {
-            document.querySelector('.mobile-menu').classList.toggle('hidden');
-        });
-    </script>
+    </main>
+
 </body>
 </html>
