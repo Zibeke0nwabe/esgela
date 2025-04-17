@@ -29,45 +29,65 @@
         <li><a style="color: #ffbb00;" href="/" class="bg-white px-3 py-2 rounded-md font-semibold hover:text-black">Logout</a></li>
     </ul>
 </nav>
-    <!-- Main Content -->
-    <main class="p-8 md:mb-24 md:mt-16">
-        <% if (applicants && applicants.length > 0) { %>
-            <h2 class="text-2xl font-bold mb-4 mt-16+">Student Table</h2>
-            <div class="overflow-x-auto">
-                <table class="w-full table-auto border-collapse ">
-                    <thead>
-                        <tr class="font-bold">
-                            <th class="border border-black px-4 py-2">Name</th>
-                            <th class="border border-black px-4 py-2">Surname</th>
-                            <th class="border border-black px-4 py-2">Student Number</th>
-                            <th class="border border-black px-4 py-2">ID Number</th>
-                            <th class="border border-black px-4 py-2">Previous School</th>
-                            <th class="border border-black px-4 py-2">ASP</th>
-                            <th class="border border-black px-4 py-2">Tertiary Level</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% applicants.forEach(applicant => { %>
-                            <tr class="hover:bg-gray-200">
-                                <td class="border border-black px-4 py-2"><%= applicant.name %></td>
-                                <td class="border border-black px-4 py-2"><%= applicant.surname %></td>
-                                <td class="border border-black px-4 py-2"><%= applicant.studentNumber %></td>
-                                <td class="border border-black px-4 py-2"><%= applicant.idNumber %></td>
-                                <td class="border border-black px-4 py-2"><%= applicant.school %></td>
-                                <td class="border border-black px-4 py-2"><%= applicant.education %> - <%= applicant.asp %></td>
-                                <td class="border border-black px-4 py-2"><%= applicant.tertiary %></td>
-                            </tr>
-                        <% }) %>
-                    </tbody>
-                </table>
-            </div>
-        <% } else { %>
-            <div class="p-8 md:mb-24 md:mt-16">
-                <p class="text-xl font-bold mb-4">No students available.</p>
-                <p class="text-gray-600">Please check back later for updated student information.</p>
-            </div>
-        <% } %>
-    </main>
+<main class="p-8 md:mb-24 md:mt-16">
+    <% if (applicants && applicants.length > 0) { %>
+        <h2 class="text-2xl font-bold mb-6">Student Applications</h2>
+
+        <!-- STUDENT DETAILS SECTION -->
+        <div class="space-y-8">
+            <% applicants.forEach(applicant => { %>
+                <div class="border rounded-lg shadow-sm p-6 bg-white">
+                    <!-- Header -->
+                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                        <div>
+                            <h3 class="text-xl font-semibold"><%= applicant.name %> <%= applicant.surname %></h3>
+                            <p class="text-sm text-gray-600">Student #: <%= applicant.studentNumber %> | ID: <%= applicant.idNumber %></p>
+                        </div>
+                        <div class="mt-2 md:mt-0">
+                            <select class="border border-gray-300 rounded px-3 py-1 text-sm">
+                                <option disabled selected>Choose action</option>
+                                <option value="accept">Accept</option>
+                                <option value="reject">Reject</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Details -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700">
+                        <p><span class="font-medium">Previous School:</span> <%= applicant.school %></p>
+                        <p><span class="font-medium">ASP:</span> <%= applicant.education %> - <%= applicant.asp %></p>
+                        <p><span class="font-medium">Tertiary Level:</span> <%= applicant.tertiary %></p>
+                        <p><span class="font-medium">Status:</span> Pending Review</p>
+                    </div>
+
+                    <!-- Supportive Documents -->
+                    <div class="mt-4">
+                        <h4 class="font-semibold text-gray-800 mb-2">Supportive Documents:</h4>
+                        <% if (applicant.documents && applicant.documents.length > 0) { %>
+                            <ul class="list-disc list-inside text-sm text-blue-600">
+                                <% applicant.documents.forEach(doc => { %>
+                                    <li>
+                                        <a href="<%= doc.url %>" target="_blank" class="hover:underline">
+                                            <%= doc.name %>
+                                        </a>
+                                    </li>
+                                <% }) %>
+                            </ul>
+                        <% } else { %>
+                            <p class="text-gray-500 text-sm italic">No documents uploaded.</p>
+                        <% } %>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <div class="p-8 md:mb-24 md:mt-16">
+            <p class="text-xl font-bold mb-4">No students available.</p>
+            <p class="text-gray-600">Please check back later for updated student information.</p>
+        </div>
+    <% } %>
+</main>
+
     <!-- Footer -->
     <footer class="bg-black text-white py-8">
         <div class="container mx-auto px-4">
