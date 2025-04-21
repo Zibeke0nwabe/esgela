@@ -1,4 +1,5 @@
 const express= require('express');
+const nodemailer = require('nodemailer');
 const mongoose = require('mongoose')
 const ejs = require('ejs')
 const path = require('path');
@@ -15,6 +16,15 @@ app.use('public/style/style.css',express.static(path.join(__dirname +'public/sty
 //importing from env
 db = process.env.MONGO_URL;
 port = process.env.PORT;
+//Creating Email Transporter
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    }
+});
+
 // setting ejs
 app.set('view engine', 'ejs');
 //connecting to mongoDB
@@ -47,28 +57,85 @@ app.get('/',(req,res)=>{
 app.get('/register',(req,res)=>{
     res.sendFile(__dirname +'/views/form.html')
 })
-app.post('/register', async (req,res)=>{
-    const {title,name,surname,password,idNumber,DOB,marital,language,gender,mobile,altmobile,email,
-    province,town,Suburb,addressCode,education,eduYear,school,Course,idCopy,certificateCopy,parentID,
-    asp,qLevel,qName,tertiary
+app.post('/register', async (req, res) => {
+    const {
+        title, name, surname, password, idNumber, DOB, marital, language, gender, mobile, altmobile, email,
+        province, town, Suburb, addressCode, education, eduYear, school, Course, idCopy, certificateCopy, parentID,
+        asp, qLevel, qName, tertiary
     } = req.body;
-    try{
+
+    try {
         const studentNumber = studentNumberGenerator();
-        const applicant = new applicantModal ({
-            title,name,surname, password,studentNumber,idNumber,DOB,marital,language,gender,mobile,altmobile,email,
-            province,town,Suburb,addressCode,education,eduYear,school,Course,idCopy,certificateCopy,parentID
-            ,asp,qLevel,qName,tertiary
-        })
-        await applicantModal.insertMany([applicant])
-        res.render('home',{ 
-            name: applicant.name, studentNumber: applicant.studentNumber,
-             idNumber:applicant.idNumber,asp:applicant.asp,education:applicant.education,
-            Course: applicant.Course,surname: applicant.surname,title:applicant.title,certificateCopy: applicant.certificateCopy
-        })
-    } catch(err){
-        res.status(404).res.sendFile(__dirname +'/views/error.html')
+        const applicant = new applicantModal({
+            title, name, surname, password, studentNumber, idNumber, DOB, marital, language, gender, mobile, altmobile, email,
+            province, town, Suburb, addressCode, education, eduYear, school, Course, idCopy, certificateCopy, parentID,
+            asp, qLevel, qName, tertiary
+        });
+
+        await applicantModal.insertMany([applicant]);
+
+        // Send confirmation email
+        const mailOptions = {
+            from: `"Esgela Admissions - DONOTREPLY" <${process.env.EMAIL_USER}>`,
+            to: applicant.email,
+            subject: 'Application Confirmation - Submitted Successfully',
+            html: `
+        <div style="font-family: Arial, sans-serif; color: #333;">
+            <h2 style="color: #2E86C1;">Welcome to Esgela, ${applicant.name} ${applicant.surname}!</h2>
+
+            <p>Thank you for registering with <strong>Esgela Coding Bootcamp</strong>. We're excited to have you begin your journey with us into the world of software development!</p>
+
+            <p>Your application has been successfully received and is currently under review by our admissions team.</p>
+
+            <h3 style="color: #117A65;">Your Registration Details:</h3>
+            <ul>
+                <li><strong>Full Name:</strong> ${applicant.title} ${applicant.name} ${applicant.surname}</li>
+                <li><strong>Student Number:</strong> ${applicant.studentNumber}</li>
+                <li><strong>Registered Course:</strong> ${applicant.Course}</li>
+                <li><strong>Login Password:</strong> ${applicant.password}</li>
+            </ul>
+
+            <p><strong>⚠️ Please keep your Student Number and Password safe</strong> — you'll need them to log in and track your application or manage your account.</p>
+
+            <p>✅ You will receive an approval email once your application has been reviewed.</p>
+
+            <p>Alternatively, you can visit our website at <a href="https://www.esgela.com" target="_blank">www.esgela.com</a> to check your application status using your student number.</p>
+
+            <hr style="margin: 20px 0;">
+            <p style="font-size: 14px; color: #888;">This is an automated message from Esgela Admissions. Please do not reply to this email.</p>
+            <p style="font-size: 14px; color: #888;">For assistance, contact us via our website or visit our campus support center.</p>
+
+            <p>Best Regards,<br/>
+            <strong>The Esgela Admissions Team</strong></p>
+        </div>
+            `
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.error('Email failed to send:', error);
+            } else {
+                console.log('Email sent:', info.response);
+            }
+        });
+
+        res.render('home', {
+            name: applicant.name,
+            studentNumber: applicant.studentNumber,
+            idNumber: applicant.idNumber,
+            asp: applicant.asp,
+            education: applicant.education,
+            Course: applicant.Course,
+            surname: applicant.surname,
+            title: applicant.title,
+            certificateCopy: applicant.certificateCopy
+        });
+
+    } catch (err) {
+        console.error(err);
+        res.status(404).sendFile(__dirname + '/views/error.html');
     }
-})
+});
 function studentNumberGenerator(){
     const prefix = '24';
     const number = '0123456789';
