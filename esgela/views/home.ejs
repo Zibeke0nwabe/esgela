@@ -14,10 +14,10 @@
     <!-- Navigation -->
         <nav class="bg-black text-white shadow-lg z-50">
          <div class="flex items-center justify-between px-4 py-3">
-            <a href="/" class="text-3xl font-bold flex items-center">
-                <span class="bg-yellow-400 text-black px-2 py-1 text-2xl rounded-sm mr-2">e</span>
-                Sgela.com
-            </a>
+            <a href="/home" class="text-lg md:text-xl font-bold flex items-center">
+                <span class="bg-yellow-400 text-black px-2 py-0.5 text-base rounded-sm mr-2">E</span>
+                SGELA.COM
+              </a>
             <!-- Mobile Menu Toggle Button -->
             <div class="md:hidden">
                 <button 
@@ -31,7 +31,7 @@
 
             </div>
             <ul class="hidden md:flex items-center space-x-4">
-                <li><a href="#" class="text-white hover:text-goldenrod font-semibold">Hello <%= name %></a></li>
+                <li><a href="#" class="text-white hover:text-goldenrod font-semibold">Hello <%= applicant.name %></a></li>
                 <button 
                 type="button" 
                 onclick="window.location.href='/'"
@@ -44,19 +44,27 @@
         </div>
         <!-- Mobile Menu -->
         <ul class="mobile-menu md:hidden hidden bg-black text-white px-4 py-2">
-            <li><a href="#" class="block py-2 hover:text-gray-400">Hello <%= name %></a></li>
+            <li><a href="#" class="text-white hover:text-goldenrod font-semibold">Hello <%= applicant.name %></a></li>
             <li><a style="color: #ffbb00;" href="/" class="bg-white px-3 py-2 rounded-md font-semibold hover:text-black">Logout</a></li>
         </ul>
     </nav>
 
     <!-- Main Content -->
     <main class="p-8 md:mb-24 md:mt-16">
-        <% if (name && studentNumber) { %>
-            <h1 class="text-3xl font-bold mb-4">Welcome, <%= title %> <%= surname %> <%= name %>!</h1>
+        <% if (applicant && applicant.name && applicant.studentNumber) { %>
+            <h1 class="text-3xl font-bold mb-4">Welcome, <%= applicant.title %> <%=applicant. surname %> <%= applicant.name %>!</h1>
             <br><br>
-            <p>Your student number is <%= studentNumber %> & Your ID number is <%= idNumber %>.</p>
+            <p>Your student number is <%= applicant.studentNumber %> & Your ID number is <%= applicant.idNumber %>.</p>
             <br>
-            <p>Your Status: Pending Approval</p>
+            <p><span class="font-medium">Status:</span>
+                <% if (applicant.status === 'Accepted') { %>
+                    <span class="text-green-600 font-semibold">Accepted</span>
+                <% } else if (applicant.status === 'Rejected') { %>
+                    <span class="text-red-600 font-semibold">Rejected</span>
+                <% } else { %>
+                    <span class="text-yellow-500 font-semibold">Pending Review</span>
+                <% } %>
+              </p>
         <% } else { %>
             <h1 class="text-3xl font-bold mb-4">Welcome!</h1>
         <% } %>

@@ -39,7 +39,8 @@ const applicantSchema = new mongoose.Schema({
  DOB: {type:String, required:true},marital: {type:String, required:true},language: {type:String},gender: {type:String},email:{type:String,required:true,unique:true},
  mobile: {type:String, required:true},altmobile: {type:String,},province: {type:String},town: {type:String},Suburb:{type:String},addressCode:{type:String,required:true,}, 
  education: {type:String, required:true},eduYear: {type:String,},school: {type:String},Course: {type:String},idCopy:{type:String},certificateCopy:{type:String},parentID:{type:String},
- asp:{type:String},tertiary:{type:String},qLevel:{type:String},qName:{type:String}
+ mathsType: { type: String },mathsLevel: { type: String },scienceLevel: { type: String },tertiary:{type:String},qLevel:{type:String},qName:{type:String},status: { type: String, default: 'Pending' },
+
 })
 
 //collection
@@ -61,7 +62,7 @@ app.post('/register', async (req, res) => {
     const {
         title, name, surname, password, idNumber, DOB, marital, language, gender, mobile, altmobile, email,
         province, town, Suburb, addressCode, education, eduYear, school, Course, idCopy, certificateCopy, parentID,
-        asp, qLevel, qName, tertiary
+        mathsType, mathsLevel, scienceLevel, qLevel, qName, tertiary
     } = req.body;
 
     try {
@@ -69,7 +70,7 @@ app.post('/register', async (req, res) => {
         const applicant = new applicantModal({
             title, name, surname, password, studentNumber, idNumber, DOB, marital, language, gender, mobile, altmobile, email,
             province, town, Suburb, addressCode, education, eduYear, school, Course, idCopy, certificateCopy, parentID,
-            asp, qLevel, qName, tertiary
+            mathsType, mathsLevel, scienceLevel, qLevel, qName, tertiary
         });
 
         await applicantModal.insertMany([applicant]);
@@ -80,34 +81,44 @@ app.post('/register', async (req, res) => {
             to: applicant.email,
             subject: 'Application Confirmation - Submitted Successfully',
             html: `
-        <div style="font-family: Arial, sans-serif; color: #333;">
-            <h2 style="color: #2E86C1;">Welcome to Esgela, ${applicant.name} ${applicant.surname}!</h2>
-
-            <p>Thank you for registering with <strong>Esgela Coding Bootcamp</strong>. We're excited to have you begin your journey with us into the world of software development!</p>
-
-            <p>Your application has been successfully received and is currently under review by our admissions team.</p>
-
-            <h3 style="color: #117A65;">Your Registration Details:</h3>
-            <ul>
-                <li><strong>Full Name:</strong> ${applicant.title} ${applicant.name} ${applicant.surname}</li>
-                <li><strong>Student Number:</strong> ${applicant.studentNumber}</li>
-                <li><strong>Registered Course:</strong> ${applicant.Course}</li>
-                <li><strong>Login Password:</strong> ${applicant.password}</li>
-            </ul>
-
-            <p><strong>⚠️ Please keep your Student Number and Password safe</strong> — you'll need them to log in and track your application or manage your account.</p>
-
-            <p>✅ You will receive an approval email once your application has been reviewed.</p>
-
-            <p>Alternatively, you can visit our website at <a href="https://www.esgela.com" target="_blank">www.esgela.com</a> to check your application status using your student number.</p>
-
-            <hr style="margin: 20px 0;">
-            <p style="font-size: 14px; color: #888;">This is an automated message from Esgela Admissions. Please do not reply to this email.</p>
-            <p style="font-size: 14px; color: #888;">For assistance, contact us via our website or visit our campus support center.</p>
-
-            <p>Best Regards,<br/>
-            <strong>The Esgela Admissions Team</strong></p>
-        </div>
+    <div style="font-family: Arial, sans-serif; color: #333333; padding: 20px;">
+        <p>Dear ${applicant.name} ${applicant.surname},</p>
+    
+        <h2 style="color: #ffbb00; font-size: 24px; font-weight: bold;">Welcome to Esgela, the Online Coding Bootcamp!</h2>
+    
+        <p style="font-size: 16px;">Thank you for submitting your application to <strong style="color: #000000;">Esgela Coding Bootcamp</strong>. We’re thrilled to see your interest in starting a journey into the world of software development!</p>
+    
+        <p style="font-size: 16px;">We’ve successfully received your application, and it is now under review by our admissions team.</p>
+    
+        <h3 style="color: #000000; font-size: 18px; margin-top: 30px;">📝 Your Application Details:</h3>
+        <ol style="padding-left: 20px; font-size: 16px;">
+            <li style="line-height: 1.8;"><strong>Full Name:</strong> ${applicant.name} ${applicant.surname}</li>
+            <li style="line-height: 1.8;"><strong>Student Number:</strong> ${applicant.studentNumber}</li>
+            <li style="line-height: 1.8;"><strong>Course Applied:</strong> ${applicant.Course}</li>
+            <li style="line-height: 1.8;"><strong>Login Password:</strong> ${applicant.password}</li>
+        </ol>
+    
+        <p style="background-color: #000000; padding: 12px; text-align: center; border-radius: 6px; color: #ffbb00; font-weight: bold;">
+            ⚠️ Please keep your Student Number and Password safe — you'll need them to log in and track your application or manage your account.
+        </p>
+    
+        <p style="font-size: 16px; margin-top: 20px;">✅ You will receive a follow-up email once your application has been reviewed and a decision has been made.</p>
+    
+        <p style="font-size: 16px;">
+            You can check your application status anytime by visiting 
+            <a href="https://www.esgela.onrender.com" target="_blank" style="color: #ffbb00; text-decoration: none;">
+                www.esgela.com
+            </a>. Log in using either your <strong>Student Number</strong> <em>or</em> <strong>ID Number</strong>, along with your <strong>Password</strong>.
+        </p>
+    
+        <hr style="margin: 30px 0; border: none; border-top: 1px solid #ccc;">
+    
+        <p style="font-size: 14px; color: #777777;">📧 This is an automated message from Esgela Admissions. Please do not reply to this email.</p>
+        <p style="font-size: 14px; color: #777777;">For assistance, contact us through our website or follow us on social media. We regularly post updates on all major platforms—stay connected!</p>
+    
+        <p style="margin-top: 30px;">Best regards,<br><br>
+        <strong style="color: #000000;">The Esgela Admissions Team</strong></p>
+    </div>
             `
         };
 
@@ -118,18 +129,7 @@ app.post('/register', async (req, res) => {
                 console.log('Email sent:', info.response);
             }
         });
-
-        res.render('home', {
-            name: applicant.name,
-            studentNumber: applicant.studentNumber,
-            idNumber: applicant.idNumber,
-            asp: applicant.asp,
-            education: applicant.education,
-            Course: applicant.Course,
-            surname: applicant.surname,
-            title: applicant.title,
-            certificateCopy: applicant.certificateCopy
-        });
+        res.render('home', { applicant });
 
     } catch (err) {
         console.error(err);
@@ -153,30 +153,25 @@ app.get('/login',(req,res)=>{
     })
 })
 
-app.post('/login', async (req,res)=>{
-    const {identifier, password}= req.body;
-    try{
+app.post('/login', async (req, res) => {
+    const { identifier, password } = req.body;
+    try {
         const applicant = await applicantModal.findOne({
-            $or: [{idNumber: identifier},{studentNumber:identifier}],
-            password:password
+            $or: [{ idNumber: identifier }, { studentNumber: identifier }],
+            password: password
         });
-        if(applicant){
-            res.render('home',{ 
-                name: applicant.name, studentNumber: applicant.studentNumber,
-                idNumber:applicant.idNumber,asp:applicant.asp,education:applicant.education,
-                surname: applicant.surname,title:applicant.tile,certificateCopy:applicant.certificateCopy
-            })
+
+        if (applicant) {
+            res.render('home', { applicant });
+        } else {
+            let error = 'User does not exist, Your Student Number (ID number) or Password might be incorrect!';
+            res.render('login', { message: error });
         }
-        else{
-            let error = 'User does not exist, Your Student Number (ID number) or Password might be incorrect!'
-            res.render('login',{
-                message:error
-            })
-        }
-    } catch(err){
-        res.status(404).res.sendFile(__dirname +'/views/error.html')
+    } catch (err) {
+        res.status(404).sendFile(__dirname + '/views/error.html');
     }
-})
+});
+
 app.get('/admin',(req,res)=>{
     let error = ''
     res.render('adminLogin',{
@@ -221,7 +216,52 @@ app.post('/admin', async (req, res) => {
         res.status(404).sendFile(__dirname +'/views/error.html')
     }
 });
-  
+app.post('/admin/decision', async (req, res) => {
+    const { id, decision } = req.body;
+
+
+    try {
+        const applicant = await applicantModal.findById(id);
+        if (!applicant) return res.status(404).json({ message: 'Applicant not found' });
+        applicant.status = decision === 'accept' ? 'Accepted' : 'Rejected';
+        await applicant.save();
+        // Send acceptance or rejection email
+        const subject = decision === 'accept' 
+            ? '🎉 Congratulations! You’ve Been Accepted to Esgela'
+            : '❌ Application Update – Esgela Coding Bootcamp';
+        
+        const htmlContent = decision === 'accept' 
+            ? `
+                <div style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
+                    <h2 style="color: #28a745;">🎉 Congratulations, ${applicant.name}!</h2>
+                    <p>Your application to <strong>Esgela Coding Bootcamp</strong> has been <strong>accepted</strong>! 🎓</p>
+                    <p>Get ready to unlock your future in software development.</p>
+                    <p style="margin-top: 20px;">Login using your student number or ID and your password to get started.</p>
+                    <p style="margin-top: 30px;">See you on the platform!<br><br><strong style="color: #000;">The Esgela Admissions Team</strong></p>
+                </div>`
+            : `
+                <div style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
+                    <h2 style="color: #e74c3c;">Dear ${applicant.name},</h2>
+                    <p>Thank you for your interest in <strong>Esgela Coding Bootcamp</strong>.</p>
+                    <p>After careful review, we regret to inform you that your application was not successful at this time.</p>
+                    <p>We encourage you to continue learning and feel free to apply again in the future.</p>
+                    <p style="margin-top: 30px;">Warm regards,<br><br><strong style="color: #000;">The Esgela Admissions Team</strong></p>
+                </div>`;
+
+        await transporter.sendMail({
+            from: `"Esgela Admissions" <${process.env.EMAIL_USER}>`,
+            to: applicant.email,
+            subject,
+            html: htmlContent
+        });
+
+        return res.json({ message: `Application ${decision}ed and email sent.` });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Server error' });
+    }
+});
+
 app.use((req, res, next) => {
     res.status(404).sendFile(__dirname +'/views/error.html');
   });

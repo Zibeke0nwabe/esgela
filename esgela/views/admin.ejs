@@ -11,10 +11,10 @@
  <!-- Navigation -->
  <nav class="bg-black text-white shadow-lg z-50">
     <div class="flex items-center justify-between px-4 py-3">
-        <a href="/" class="text-2xl font-bold flex items-center">
-            <span class="bg-yellow-400 text-black px-2 py-1 text-xl rounded-sm mr-2">e</span>
-            Sgela.com
-        </a>
+        <a href="/" class="text-lg md:text-xl font-bold flex items-center">
+            <span class="bg-yellow-400 text-black px-2 py-0.5 text-base rounded-sm mr-2">E</span>
+            SGELA.COM
+          </a>
         <button 
         type="button" 
         onclick="window.location.href='/'"
@@ -36,43 +36,63 @@
         <!-- STUDENT DETAILS SECTION -->
         <div class="space-y-8">
             <% applicants.forEach(applicant => { %>
-                <div class="border rounded-lg shadow-sm p-6 bg-white">
+                <hr/>
+                <div class="p-6 pt-2 bg-white">
                     <!-- Header -->
                     <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
                         <div>
                             <h3 class="text-xl font-semibold"><%= applicant.name %> <%= applicant.surname %></h3>
-                            <p class="text-sm text-gray-600">Student #: <%= applicant.studentNumber %> | ID: <%= applicant.idNumber %></p>
+                            <p class="text-sm text-gray-600">Student : <%= applicant.studentNumber %> | ID: <%= applicant.idNumber %></p>
                         </div>
                         <div class="mt-2 md:mt-0">
-                            <select class="border border-gray-300 rounded px-3 py-1 text-sm">
-                                <option disabled selected>Choose action</option>
-                                <option value="accept">Accept</option>
-                                <option value="reject">Reject</option>
-                            </select>
+                        <div class="mt-2 md:mt-0 space-x-2">
+                            <button 
+                                class="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded text-sm"
+                                onclick="handleDecision('<%= applicant._id %>', 'accept')"
+                            >
+                                Accept
+                            </button>
+                            <button 
+                                class="bg-red-600 hover:bg-red-700 text-white px-4 py-1 rounded text-sm"
+                                onclick="handleDecision('<%= applicant._id %>', 'reject')"
+                            >
+                                Reject
+                            </button>
+                        </div>
                         </div>
                     </div>
-
                     <!-- Details -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700">
                         <p><span class="font-medium">Previous School:</span> <%= applicant.school %></p>
-                        <p><span class="font-medium">ASP:</span> <%= applicant.education %> - <%= applicant.asp %></p>
+                        <p><span class="font-medium">Maths Score:</span> <%= applicant.asp %></p>
                         <p><span class="font-medium">Tertiary Level:</span> <%= applicant.tertiary %></p>
-                        <p><span class="font-medium">Status:</span> Pending Review</p>
+                        <p>
+                            <span class="font-medium">Status:</span>
+                            <% if (applicant.status === 'Accepted') { %>
+                              <span class="text-green-600 font-semibold">Accepted</span>
+                            <% } else if (applicant.status === 'Rejected') { %>
+                              <span class="text-red-600 font-semibold">Rejected</span>
+                            <% } else { %>
+                              <span class="text-yellow-600 font-semibold">Pending Review</span>
+                            <% } %>
+                          </p>
                     </div>
 
                     <!-- Supportive Documents -->
                     <div class="mt-4">
                         <h4 class="font-semibold text-gray-800 mb-2">Supportive Documents:</h4>
-                        <% if (applicant.documents && applicant.documents.length > 0) { %>
+                        <% if (applicant.idCopy || applicant.certificateCopy || applicant.parentID) { %>
                             <ul class="list-disc list-inside text-sm text-blue-600">
-                                <% applicant.documents.forEach(doc => { %>
-                                    <li>
-                                        <a href="<%= doc.url %>" target="_blank" class="hover:underline">
-                                            <%= doc.name %>
-                                        </a>
-                                    </li>
-                                <% }) %>
-                            </ul>
+                                <% if (applicant.idCopy) { %>
+                                  <li><a href="<%= applicant.idCopy %>" target="_blank" class="hover:underline">ID Copy</a></li>
+                                <% } %>
+                                <% if (applicant.certificateCopy) { %>
+                                  <li><a href="<%= applicant.certificateCopy %>" target="_blank" class="hover:underline">Certificate</a></li>
+                                <% } %>
+                                <% if (applicant.parentID) { %>
+                                  <li><a href="<%= applicant.parentID %>" target="_blank" class="hover:underline">Parent ID</a></li>
+                                <% } %>
+                              </ul>
                         <% } else { %>
                             <p class="text-gray-500 text-sm italic">No documents uploaded.</p>
                         <% } %>
@@ -130,4 +150,27 @@
         </div>
     </footer>
 </body>
+<script>
+    function handleDecision(applicantId, decision) {
+        if (confirm(`Are you sure you want to ${decision} this applicant?`)) {
+            fetch(`/admin/decision`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: applicantId, decision: decision })
+            })
+            .then(res => res.json())
+            .then(data => {
+                alert(data.message);
+                window.location.reload(); // refresh to update status
+            })
+            .catch(err => {
+                console.error(err);
+                alert('Something went wrong. Please try again.');
+            });
+        }
+    }
+</script>
+
 </html>
