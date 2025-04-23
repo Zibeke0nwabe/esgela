@@ -1,98 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Esgela.com - Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body class="bg-white">
- <!-- Navigation -->
- <nav class="bg-black text-white shadow-lg z-50">
+
+<!-- Navigation -->
+<nav class="bg-black text-white shadow-lg z-50">
     <div class="flex items-center justify-between px-4 py-3">
         <a href="/" class="text-lg md:text-xl font-bold flex items-center">
             <span class="bg-yellow-400 text-black px-2 py-0.5 text-base rounded-sm mr-2">E</span>
             SGELA.COM
-          </a>
+        </a>
         <button 
-        type="button" 
-        onclick="window.location.href='/'"
-        class="text-white border border-white hover:bg-white hover:text-black focus:ring-4 focus:outline-none focus:ring-white/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center transition-colors duration-200 dark:focus:ring-white/50 me-2 mb-2"
-      >
-        <i class="fas fa-sign-out-alt text-base align-middle me-2"></i>
-        Sign out
-      </button>
+            type="button" 
+            onclick="window.location.href='/'"
+            class="text-white border border-white hover:bg-white hover:text-black focus:ring-4 focus:outline-none focus:ring-white/50 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center transition-colors duration-200 me-2 mb-2"
+        >
+            <i class="fas fa-sign-out-alt text-base me-2"></i> Sign out
+        </button>
     </div>
-    <!-- Mobile Menu -->
-    <ul class="mobile-menu lg:hidden hidden bg-black text-white px-4 py-2">
-        <li><a style="color: #ffbb00;" href="/" class="bg-white px-3 py-2 rounded-md font-semibold hover:text-black">Logout</a></li>
-    </ul>
 </nav>
+
 <main class="p-8 md:mb-24 md:mt-16">
     <% if (applicants && applicants.length > 0) { %>
         <h2 class="text-2xl font-bold mb-6">Student Applications</h2>
+
+        <!-- Filter/Search Controls -->
+        <div class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div class="flex gap-2">
+                <select id="statusFilter" onchange="applyFilters()" class="border px-2 py-1 rounded">
+                    <option value="">All Status</option>
+                    <option value="Accepted">Accepted</option>
+                    <option value="Rejected">Rejected</option>
+                    <option value="Pending Review">Pending Review</option>
+                </select>
+                <select id="tertiaryFilter" onchange="applyFilters()" class="border px-2 py-1 rounded">
+                    <option value="">Tertiary Completed</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+                <select id="mathsFilter" onchange="applyFilters()" class="border px-2 py-1 rounded">
+                    <option value="">All Maths Scores</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                </select>
+                <select id="physicsFilter" onchange="applyFilters()" class="border px-2 py-1 rounded">
+                    <option value="">All Physics Scores</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                </select>
+            </div>
+            <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Search by name or student number..." class="border px-4 py-2 rounded w-full md:w-64" />
+        </div>
 
         <!-- STUDENT DETAILS SECTION -->
         <div class="space-y-8">
             <% applicants.forEach(applicant => { %>
                 <hr/>
-                <div class="p-6 pt-2 bg-white">
+                <div 
+                    data-applicant 
+                    data-name="<%= applicant.name + ' ' + applicant.surname %>" 
+                    data-studentnumber="<%= applicant.studentNumber %>" 
+                    data-status="<%= applicant.status %>" 
+                    data-tertiary="<%= applicant.tertiary %>" 
+                    data-maths="<%= applicant.maths %>"
+                    data-physics="<%= applicant.physics %>"
+                    class="p-6 pt-2 bg-white border rounded shadow"
+                >
                     <!-- Header -->
                     <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
                         <div>
                             <h3 class="text-xl font-semibold"><%= applicant.name %> <%= applicant.surname %></h3>
                             <p class="text-sm text-gray-600">Student : <%= applicant.studentNumber %> | ID: <%= applicant.idNumber %></p>
+                            <p class="text-sm text-gray-600">Email: <%= applicant.email %></p>
+                            <p class="text-sm text-gray-600">Phone: <%= applicant.phone %></p>
                         </div>
-                        <div class="mt-2 md:mt-0">
                         <div class="mt-2 md:mt-0 space-x-2">
                             <button 
                                 class="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded text-sm"
                                 onclick="handleDecision('<%= applicant._id %>', 'accept')"
-                            >
-                                Accept
-                            </button>
+                            >Accept</button>
                             <button 
                                 class="bg-red-600 hover:bg-red-700 text-white px-4 py-1 rounded text-sm"
                                 onclick="handleDecision('<%= applicant._id %>', 'reject')"
-                            >
-                                Reject
-                            </button>
-                        </div>
+                            >Reject</button>
                         </div>
                     </div>
+
                     <!-- Details -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700">
                         <p><span class="font-medium">Previous School:</span> <%= applicant.school %></p>
-                        <p><span class="font-medium">Maths Score:</span> <%= applicant.asp %></p>
-                        <p><span class="font-medium">Tertiary Level:</span> <%= applicant.tertiary %></p>
-                        <p>
-                            <span class="font-medium">Status:</span>
+                        <p><span class="font-medium">Maths Score:</span> <%= applicant.maths %></p>
+                        <p><span class="font-medium">Physics Score:</span> <%= applicant.physics %></p>
+                        <p><span class="font-medium">Tertiary Level Completed:</span> <%= applicant.tertiary === 'Yes' ? 'Yes' : 'No' %></p>
+                        <p><span class="font-medium">Status:</span>
                             <% if (applicant.status === 'Accepted') { %>
-                              <span class="text-green-600 font-semibold">Accepted</span>
+                                <span class="text-green-600 font-semibold">Accepted</span>
                             <% } else if (applicant.status === 'Rejected') { %>
-                              <span class="text-red-600 font-semibold">Rejected</span>
+                                <span class="text-red-600 font-semibold">Rejected</span>
                             <% } else { %>
-                              <span class="text-yellow-600 font-semibold">Pending Review</span>
+                                <span class="text-yellow-600 font-semibold">Pending Review</span>
                             <% } %>
-                          </p>
+                        </p>
                     </div>
 
                     <!-- Supportive Documents -->
                     <div class="mt-4">
                         <h4 class="font-semibold text-gray-800 mb-2">Supportive Documents:</h4>
                         <% if (applicant.idCopy || applicant.certificateCopy || applicant.parentID) { %>
-                            <ul class="list-disc list-inside text-sm text-blue-600">
+                            <ul class="list-disc list-inside text-sm text-blue-600 space-y-1">
                                 <% if (applicant.idCopy) { %>
-                                  <li><a href="<%= applicant.idCopy %>" target="_blank" class="hover:underline">ID Copy</a></li>
+                                    <li>
+                                        <a href="<%= applicant.idCopy %>" target="_blank" class="hover:underline">ID Copy</a>
+                                        <a href="<%= applicant.idCopy %>" download class="ml-2 text-green-600 hover:underline">(Download)</a>
+                                    </li>
                                 <% } %>
                                 <% if (applicant.certificateCopy) { %>
-                                  <li><a href="<%= applicant.certificateCopy %>" target="_blank" class="hover:underline">Certificate</a></li>
+                                    <li>
+                                        <a href="<%= applicant.certificateCopy %>" target="_blank" class="hover:underline">Certificate</a>
+                                        <a href="<%= applicant.certificateCopy %>" download class="ml-2 text-green-600 hover:underline">(Download)</a>
+                                    </li>
                                 <% } %>
                                 <% if (applicant.parentID) { %>
-                                  <li><a href="<%= applicant.parentID %>" target="_blank" class="hover:underline">Parent ID</a></li>
+                                    <li>
+                                        <a href="<%= applicant.parentID %>" target="_blank" class="hover:underline">Parent ID</a>
+                                        <a href="<%= applicant.parentID %>" download class="ml-2 text-green-600 hover:underline">(Download)</a>
+                                    </li>
                                 <% } %>
-                              </ul>
+                            </ul>
                         <% } else { %>
                             <p class="text-gray-500 text-sm italic">No documents uploaded.</p>
                         <% } %>
@@ -101,69 +153,58 @@
             <% }) %>
         </div>
     <% } else { %>
-        <div class="p-8 md:mb-24 md:mt-16">
+        <div class="p-8">
             <p class="text-xl font-bold mb-4">No students available.</p>
             <p class="text-gray-600">Please check back later for updated student information.</p>
         </div>
     <% } %>
 </main>
 
-    <!-- Footer -->
-    <footer class="bg-black text-white py-8">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-xl font-semibold mb-4" style="color: #ffbb00">About Esgela</h3>
-                    <p class="text-gray-400">Esgela is a leading online learning platform offering a wide range of courses in various fields. Our mission is to empower individuals through education, providing accessible and affordable learning opportunities for everyone.</p>
-                    <div class="mt-4">
-                    <a href="#" class="text-blue-600 hover:text-white mr-4"><i class="fab fa-facebook-f md:text-2xl"></i></a>
-                    <a href="#" class="text-blue-400 hover:text-white mr-4"><i class="fab fa-linkedin md:text-2xl"></i></a>
-                    <a style="color: #ffbb00;" href="#" class="hover:text-white mr-4"><i class="fab fa-git md:text-2xl"></i></a>
-                    <a href="#" class="text-red-600 hover:text-white mr-4"><i class="fab fa-youtube md:text-2xl"></i></a>
-                    </div>
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold mb-4" style="color: #ffbb00">Contact Us</h3>
-                    <p class="text-gray-400">Have questions or need support? Reach out to our team:</p>
-                    <ul class="mt-4">
+<!-- Footer -->
+<footer class="bg-black text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-xl font-semibold mb-4" style="color: #ffbb00">About Esgela</h3>
+                <p class="text-gray-400">Esgela is a leading online learning platform offering a wide range of courses in various fields.</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold mb-4" style="color: #ffbb00">Contact Us</h3>
+                <ul class="text-gray-400">
                     <li><i style="color:#ffbb00;" class="fas fa-envelope mr-2"></i> Zibekeonwabe@esgela.com</li>
-                    <li><i style="color:#ffbb00;" class="fas fa-phone mr-2"></i> +27   (78) 430-00901</li></ul>
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold mb-4" style="color: #ffbb00">Subscribe</h3>
-                    <p class="text-gray-400 mb-4">Subscribe to our newsletter for updates on new courses and promotions.</p>
-                    <form action="#" method="post">
-                        <input type="email" name="email" id="email" placeholder="Your email"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:border-black">
-                        <button type="submit"
-                            class="btnSubmit text-white rounded-md px-4 py-2 hover:bg-gray-800 focus:outline-none focus:bg-gray-800 transition duration-300 ease-in-out" style='background:#ffbb00;'>Subscribe</button>
-                    </form>
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold mb-4" style="color: #ffbb00">Legal</h3>
-                    <ul>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
-                    </ul>
-                </div>
+                    <li><i style="color:#ffbb00;" class="fas fa-phone mr-2"></i> +27 (78) 430-00901</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold mb-4" style="color: #ffbb00">Subscribe</h3>
+                <form>
+                    <input type="email" placeholder="Your email" class="w-full px-4 py-2 border rounded mb-4" />
+                    <button type="submit" class="w-full py-2 bg-yellow-400 hover:bg-yellow-500 text-black font-bold rounded">Subscribe</button>
+                </form>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold mb-4" style="color: #ffbb00">Legal</h3>
+                <ul>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                </ul>
             </div>
         </div>
-    </footer>
-</body>
+    </div>
+</footer>
+
 <script>
     function handleDecision(applicantId, decision) {
         if (confirm(`Are you sure you want to ${decision} this applicant?`)) {
-            fetch(`/admin/decision`, {
+            fetch('/admin/decision', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ id: applicantId, decision: decision })
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: applicantId, decision })
             })
             .then(res => res.json())
             .then(data => {
                 alert(data.message);
-                window.location.reload(); // refresh to update status
+                window.location.reload();
             })
             .catch(err => {
                 console.error(err);
@@ -171,6 +212,31 @@
             });
         }
     }
-</script>
 
+    function applyFilters() {
+        const searchValue = document.getElementById('searchInput').value.toLowerCase();
+        const statusValue = document.getElementById('statusFilter').value;
+        const tertiaryValue = document.getElementById('tertiaryFilter').value;
+        const mathsValue = document.getElementById('mathsFilter').value;
+        const physicsValue = document.getElementById('physicsFilter').value;
+
+        document.querySelectorAll('[data-applicant]').forEach(card => {
+            const name = card.dataset.name.toLowerCase();
+            const studentNumber = card.dataset.studentnumber;
+            const status = card.dataset.status;
+            const tertiary = card.dataset.tertiary;
+            const maths = card.dataset.maths;
+            const physics = card.dataset.physics;
+
+            const matchesSearch = name.includes(searchValue) || studentNumber.includes(searchValue);
+            const matchesStatus = !statusValue || status === statusValue;
+            const matchesTertiary = !tertiaryValue || tertiary === tertiaryValue;
+            const matchesMaths = !mathsValue || maths === mathsValue;
+            const matchesPhysics = !physicsValue || physics === physicsValue;
+
+            card.style.display = (matchesSearch && matchesStatus && matchesTertiary && matchesMaths && matchesPhysics) ? '' : 'none';
+        });
+    }
+</script>
+</body>
 </html>
