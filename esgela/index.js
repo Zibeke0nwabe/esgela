@@ -38,7 +38,7 @@ const applicantSchema = new mongoose.Schema({
  title:{type:String,required:true}, name: {type:String, required:true},surname:{type:String},password: {type:String, required:true},studentNumber: {type:String,unique:true},idNumber:{type:String,required:true,unique:true},
  DOB: {type:String, required:true},marital: {type:String, required:true},language: {type:String},gender: {type:String},email:{type:String,required:true,unique:true},
  mobile: {type:String, required:true},altmobile: {type:String,},province: {type:String},town: {type:String},Suburb:{type:String},addressCode:{type:String,required:true,}, 
- education: {type:String, required:true},eduYear: {type:String,},school: {type:String},Course: {type:String},idCopy:{type:String},certificateCopy:{type:String},parentID:{type:String},
+ education: {type:String, required:true},eduYear: {type:String,},school: {type:String},Courses: {type:String},idCopy:{type:String},certificateCopy:{type:String},parentID:{type:String},
  mathsType: { type: String },mathsLevel: { type: String },scienceLevel: { type: String },tertiary:{type:String},qLevel:{type:String},qName:{type:String},status: { type: String, default: 'Pending' },
 
 })
@@ -61,7 +61,7 @@ app.get('/register',(req,res)=>{
 app.post('/register', async (req, res) => {
     const {
         title, name, surname, password, idNumber, DOB, marital, language, gender, mobile, altmobile, email,
-        province, town, Suburb, addressCode, education, eduYear, school, Course, idCopy, certificateCopy, parentID,
+        province, town, Suburb, addressCode, education, eduYear, school, Courses, idCopy, certificateCopy, parentID,
         mathsType, mathsLevel, scienceLevel, qLevel, qName, tertiary
     } = req.body;
 
@@ -69,7 +69,7 @@ app.post('/register', async (req, res) => {
         const studentNumber = studentNumberGenerator();
         const applicant = new applicantModal({
             title, name, surname, password, studentNumber, idNumber, DOB, marital, language, gender, mobile, altmobile, email,
-            province, town, Suburb, addressCode, education, eduYear, school, Course, idCopy, certificateCopy, parentID,
+            province, town, Suburb, addressCode, education, eduYear, school, Courses, idCopy, certificateCopy, parentID,
             mathsType, mathsLevel, scienceLevel, qLevel, qName, tertiary
         });
 
@@ -94,7 +94,7 @@ app.post('/register', async (req, res) => {
         <ol style="padding-left: 20px; font-size: 16px;">
             <li style="line-height: 1.8;"><strong>Full Name:</strong> ${applicant.name} ${applicant.surname}</li>
             <li style="line-height: 1.8;"><strong>Student Number:</strong> ${applicant.studentNumber}</li>
-            <li style="line-height: 1.8;"><strong>Course Applied:</strong> ${applicant.Course}</li>
+            <li style="line-height: 1.8;"><strong>Course Applied:</strong> ${applicant.Courses}</li>
             <li style="line-height: 1.8;"><strong>Login Password:</strong> ${applicant.password}</li>
         </ol>
     
